@@ -1,0 +1,130 @@
+Router>enable
+Router#configure terminal 
+Router(config)#hostname R-07
+
+R-07(config)#interface g0/0/0
+R-07(config-if)#description SW-11 Link
+R-07(config-if)#ip address 172.16.5.1 255.255.255.192
+R-07(config-if)#ip helper-address 172.16.0.2
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config)#interface g0/0/1
+R-07(config-if)#description SW-12 Link
+R-07(config-if)#ip address 172.16.5.97 255.255.255.224
+R-07(config-if)#ip helper-address 172.16.0.2
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config)#interface s0/1/0
+R-07(config-if)#description R-03 Link
+R-07(config-if)#ip address 172.16.5.198 255.255.255.252
+R-07(config-if)#clock rate 64000
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+
+R-07  Remote Network
+
+172.16.0.0/24
+172.16.1.0/24
+172.16.2.0/24
+172.16.3.0/25
+172.16.3.128/25
+172.16.4.0/26
+172.16.4.64/26
+172.16.4.128/28
+172.16.4.192/26
+172.16.5.0/26
+172.16.5.64/27
+172.16.5.96/27
+172.16.5.128/27
+172.16.5.160/28
+
+
+ip route 172.16.0.0 255.255.255.0 172.16.5.197
+ip route 172.16.1.0 255.255.255.0 172.16.5.197
+ip route 172.16.2.0 255.255.255.0 172.16.5.197
+ip route 172.16.3.0 255.255.255.128 172.16.5.197
+ip route 172.16.3.128 255.255.255.254 172.16.5.197
+ip route 172.16.4.0 255.255.255.192 172.16.5.197
+ip route 172.16.4.128 255.255.255.192 172.16.5.197
+ip route 172.16.4.192 255.255.255.192 172.16.5.197
+ip route 172.16.4.64 255.255.255.192 172.16.5.197
+ip route 172.16.5.64 255.255.255.224 172.16.5.197
+ip route 172.16.5.128 255.255.255.224 172.16.5.197
+ip route 172.16.5.160 255.255.255.240 172.16.5.197
+
+
+ip route 172.16.5.184 255.255.255.252 172.16.5.197
+ip route 172.16.5.180 255.255.255.252 172.16.5.197
+ip route 172.16.5.188 255.255.255.252 172.16.5.197
+ip route 172.16.5.200 255.255.255.252 172.16.5.197
+ip route 172.16.5.176 255.255.255.252 172.16.5.197
+ip route 172.16.5.192 255.255.255.252 172.16.5.197
+
+
+R-07(config)#ip route 172.16.0.0 255.255.255.0 172.16.5.197
+R-07(config)#ip route 172.16.1.0 255.255.255.0 172.16.5.197
+R-07(config)#ip route 172.16.2.0 255.255.255.0 172.16.5.197
+R-07(config)#ip route 172.16.3.0 255.255.255.128 172.16.5.197
+R-07(config)#ip route 172.16.3.128 255.255.255.254 172.16.5.197
+R-07(config)#ip route 172.16.4.0 255.255.255.192 172.16.5.197
+R-07(config)#ip route 172.16.4.128 255.255.255.192 172.16.5.197
+R-07(config)#ip route 172.16.4.192 255.255.255.192 172.16.5.197
+R-07(config)#ip route 172.16.4.64 255.255.255.192 172.16.5.197
+R-07(config)#ip route 172.16.5.64 255.255.255.224 172.16.5.197
+R-07(config)#ip route 172.16.5.128 255.255.255.224 172.16.5.197
+R-07(config)#ip route 172.16.5.160 255.255.255.240 172.16.5.197
+R-07(config)#
+R-07(config)#
+R-07(config)#ip route 172.16.5.184 255.255.255.252 172.16.5.197
+R-07(config)#ip route 172.16.5.180 255.255.255.252 172.16.5.197
+R-07(config)#ip route 172.16.5.188 255.255.255.252 172.16.5.197
+R-07(config)#ip route 172.16.5.200 255.255.255.252 172.16.5.197
+R-07(config)#ip route 172.16.5.176 255.255.255.252 172.16.5.197
+R-07(config)#ip route 172.16.5.192 255.255.255.252 172.16.5.197
+
+R-07#clock set 4:45:50 22 MAR 2026
+R-07#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R-07(config)#
+R-07(config)#banner motd *
+Enter TEXT message.  End with the character '*'.
+################################################
+This is Secure area. Please Enter your Authentication.
+################################################# *
+
+R-07(config)#
+R-07(config)#security passwords min-length 10
+R-07(config)#enable secret Thinethi@2520.lk
+R-07(config)#service password-encryption
+R-07(config)#
+R-07(config)#line console 0
+R-07(config-line)#password Thinethi@2540.lk
+R-07(config-line)#exec-timeout 20
+R-07(config-line)#login
+R-07(config-line)#exit
+R-07(config)#line vty 0 
+R-07(config-line)#password abc@234
+% Password too short - must be at least 10 characters. Password not configured.
+R-07(config-line)#exec-timeout 20
+R-07(config-line)#login
+R-07(config-line)#exit
+
+R-07(config)#ip domain-name sltsc.lk
+R-07(config)#username sshroot secret Admin@$ltSc.Lk
+R-07(config)#crypto key generate rsa
+How many bits in the modulus [512]: 2048
+% Generating 2048 bit RSA keys, keys will be non-exportable...[OK]
+
+R-07(config)#ip ssh version 2
+
+R-07(config)#line vty 0 
+R-07(config-line)#login local
+R-07(config-line)#transport input ssh
+R-07(config-line)#exec-timeout 20
+R-07(config-line)#exit
+
+R-07(config)#login block-for 1200 attempts 4 within 60
+R-07(config)#exit

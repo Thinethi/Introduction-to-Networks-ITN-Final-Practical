@@ -1,0 +1,95 @@
+Router>enable
+Router#configure terminal
+Router(config)#hostname R-01
+
+R-01(config)#interface g0/0/0
+R-01(config-if)#description SW-01 Link
+R-01(config-if)#ip address 172.16.1.1 255.255.255.0
+R-01(config-if)#ip helper-address 172.16.0.2
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#interface g0/0/1
+R-01(config-if)#description SW-02 Link
+R-01(config-if)#ip address 172.16.2.1 255.255.255.0
+R-01(config-if)#ip helper-address 172.16.0.2
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#interface s0/1/0
+R-01(config-if)#description R-02 Link
+R-01(config-if)#ip address 172.16.5.178 255.255.255.252
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#interface s0/1/1
+R-01(config-if)#description R-08 Link
+R-01(config-if)#ip address 172.16.5.201 255.255.255.252
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+
+R-01  Remote Network
+
+172.16.0.0/24
+172.16.3.0/25
+172.16.3.128/25
+172.16.4.0/26
+172.16.4.64/26
+172.16.4.128/28
+172.16.5.0/26
+172.16.5.64/27
+172.16.5.96/27
+172.16.5.128/27
+
+172.16.4.192/26
+172.16.5.160/28
+
+
+
+ip route 172.16.0.0 255.255.255.0 172.16.5.177
+ip route 172.16.3.0 255.255.255.128 172.16.5.177
+ip route 172.16.3.128 255.255.255.128 172.16.5.177
+ip route 172.16.4.0 255.255.255.192 172.16.5.177
+ip route 172.16.4.64 255.255.255.192 172.16.5.177
+ip route 172.16.4.128 255.255.255.192 172.16.5.177
+ip route 172.16.5.0 255.255.255.192 172.16.5.177
+ip route 172.16.5.64 255.255.255.224 172.16.5.177
+ip route 172.16.5.96 255.255.255.224 172.16.5.177
+ip route 172.16.5.128 255.255.255.224 172.16.5.177
+ip route 172.16.5.160 255.255.255.240 172.16.5.202
+ip route 172.16.4.192 255.255.255.192 172.16.5.202
+
+ip route 172.16.5.180 255.255.255.252 172.16.5.177
+ip route 172.16.5.196 255.255.255.252 172.16.5.177
+ip route 172.16.5.184 255.255.255.252 172.16.5.177
+ip route 172.16.5.188 255.255.255.252 172.16.5.177
+ip route 172.16.5.192 255.255.255.252 172.16.5.177
+
+
+
+R-01#conf terminal 
+R-01(config)#ip route 172.16.0.0 255.255.255.0 172.16.5.177
+R-01(config)#ip route 172.16.3.0 255.255.255.128 172.16.5.177
+R-01(config)#ip route 172.16.3.128 255.255.255.128 172.16.5.177
+R-01(config)#ip route 172.16.4.0 255.255.255.192 172.16.5.177
+R-01(config)#ip route 172.16.4.64 255.255.255.192 172.16.5.177
+R-01(config)#ip route 172.16.4.128 255.255.255.192 172.16.5.177
+R-01(config)#ip route 172.16.5.0 255.255.255.192 172.16.5.177
+R-01(config)#ip route 172.16.5.64 255.255.255.224 172.16.5.177
+R-01(config)#ip route 172.16.5.96 255.255.255.224 172.16.5.177
+R-01(config)#ip route 172.16.5.128 255.255.255.224 172.16.5.177
+R-01(config)#ip route 172.16.5.160 255.255.255.240 172.16.5.202
+R-01(config)#ip route 172.16.4.192 255.255.255.192 172.16.5.202
+R-01(config)#ip route 172.16.5.180 255.255.255.252 172.16.5.177
+R-01(config)#ip route 172.16.5.196 255.255.255.252 172.16.5.177
+R-01(config)#ip route 172.16.5.184 255.255.255.252 172.16.5.177
+R-01(config)#ip route 172.16.5.188 255.255.255.252 172.16.5.177
+R-01(config)#ip route 172.16.5.192 255.255.255.252 172.16.5.177
+
+
+
+R-01#copy running-config tftp
+Address or name of remote host []? 172.16.0.2
+Destination filename [R-01-confg]? 
+

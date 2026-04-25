@@ -1,0 +1,44 @@
+conf t
+clock set 10:30:00 22 MAR 2026
+
+banner motd #
+################################################
+This is Secure area. Please Enter your Authentication.
+################################################
+#
+
+security passwords min-length 10
+enable secret Thinethi@2520.lk
+service password-encryption
+
+line console 0
+password Thinethi@2540.lk
+exec-timeout 20
+login
+exit
+
+line vty 0 
+password abc@234
+exec-timeout 20
+login
+exit
+
+hostname R-01
+ip domain-name sltsc.lk
+username sshroot secret Admin@$ltSc.Lk
+crypto key generate rsa
+2048
+ip ssh version 2
+
+line vty 0 
+login local
+transport input ssh
+exec-timeout 20
+exit
+
+login block-for 1200 attempts 4 within 60
+end
+
+
+
+===========DHCP pool 

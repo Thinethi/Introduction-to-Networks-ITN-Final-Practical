@@ -1,0 +1,87 @@
+Router>
+Router>enable
+Router#configure terminal 
+Router(config)#hostname R-03
+
+R-03(config)#interface g0/0/0
+R-03(config-if)#description SW-03 Link
+R-03(config-if)#ip address 172.16.3.129 255.255.255.128
+R-03(config-if)#ip helper-address 172.16.0.2
+R-03(config-if)#no shutdown
+R-03(config-if)#exit
+
+R-03(config)#interface g0/0/1
+R-03(config-if)#description SW-04 Link
+R-03(config-if)#ip address 172.16.4.65 255.255.255.192
+R-03(config-if)#ip helper-address 172.16.0.2
+R-03(config-if)#no shutdown
+R-03(config-if)#exit
+
+R-03(config)#interface s0/1/1
+R-03(config-if)#description R-02 Link
+R-03(config-if)#ip address 172.16.5.182 255.255.255.252
+R-03(config-if)#no shutdown
+R-03(config-if)#exit
+
+R-03(config)#interface s0/1/0
+R-03(config-if)#description R-07 Link
+R-03(config-if)#ip address 172.16.5.197 255.255.255.252
+R-03(config-if)#no shutdown
+R-03(config-if)#exit
+
+
+R-03  Remote Network
+
+172.16.3.0/25
+
+172.16.0.0/24
+172.16.1.0/24
+172.16.2.0/24
+172.16.4.0/26
+172.16.4.64/26
+172.16.4.128/28
+172.16.4.192/26
+172.16.5.0/26
+172.16.5.64/27
+172.16.5.128/27
+172.16.5.160/28
+
+
+ip route 172.16.0.0 255.255.255.0 172.16.5.181
+ip route 172.16.1.0 255.255.255.0 172.16.5.181
+ip route 172.16.2.0 255.255.255.0 172.16.5.181
+ip route 172.16.3.0 255.255.255.128 172.16.5.181
+ip route 172.16.4.0 255.255.255.192 172.16.5.181
+ip route 172.16.4.128 255.255.255.192 172.16.5.181
+ip route 172.16.4.192 255.255.255.192 172.16.5.181
+ip route 172.16.5.0 255.255.255.192 172.16.5.198
+ip route 172.16.5.64 255.255.255.224 172.16.5.181
+ip route 172.16.5.96 255.255.255.224 172.16.5.181
+ip route 172.16.5.128 255.255.255.224 172.16.5.198
+ip route 172.16.5.160 255.255.255.240 172.16.5.181
+
+ip route 172.16.5.176 255.255.255.252 172.16.5.181
+ip route 172.16.5.200 255.255.255.252 172.16.5.181
+ip route 172.16.5.188 255.255.255.252 172.16.5.181
+ip route 172.16.5.192 255.255.255.252 172.16.5.181
+ip route 172.16.5.184 255.255.255.252 172.16.5.181
+
+
+R-03(config)#ip route 172.16.0.0 255.255.255.0 172.16.5.181
+R-03(config)#ip route 172.16.1.0 255.255.255.0 172.16.5.181
+R-03(config)#ip route 172.16.2.0 255.255.255.0 172.16.5.181
+R-03(config)#ip route 172.16.3.0 255.255.255.128 172.16.5.181
+R-03(config)#ip route 172.16.4.0 255.255.255.192 172.16.5.181
+R-03(config)#ip route 172.16.4.128 255.255.255.192 172.16.5.181
+R-03(config)#ip route 172.16.4.192 255.255.255.192 172.16.5.181
+R-03(config)#ip route 172.16.5.0 255.255.255.192 172.16.5.198
+R-03(config)#ip route 172.16.5.64 255.255.255.224 172.16.5.181
+R-03(config)#ip route 172.16.5.96 255.255.255.224 172.16.5.181
+R-03(config)#ip route 172.16.5.128 255.255.255.224 172.16.5.198
+R-03(config)#ip route 172.16.5.160 255.255.255.240 172.16.5.181
+R-03(config)#
+R-03(config)#ip route 172.16.5.176 255.255.255.252 172.16.5.181
+R-03(config)#ip route 172.16.5.200 255.255.255.252 172.16.5.181
+R-03(config)#ip route 172.16.5.188 255.255.255.252 172.16.5.181
+R-03(config)#ip route 172.16.5.192 255.255.255.252 172.16.5.181
+R-03(config)#ip route 172.16.5.184 255.255.255.252 172.16.5.181
